@@ -1,42 +1,64 @@
-/**
- * @file delay.cpp
- *
- * @version 01.01 20201227
- *
- * @brief OIS 2020-12-15
- *
- * @ingroup delay
- * (Note: this needs exactly one @defgroup somewhere)
- *
- * @author Castellani Davide
- *
- * Contact: contacts@castellanidavide.it
- *
+/*
+ * NOTE: it is recommended to use this even if you don't
+ * understand the following code.
  */
 
-// Includes
-#include <bits/stdc++.h>
+#include <fstream>
+#include <iostream>
+#include <vector>
+
 using namespace std;
 
-// Variabiles
+// input data
 int N;
+vector<int> S, D, O;
 
-// Main code
-int main()
-{
-  // Cncomment the following lines if you want to read/write from files
-  // freopen("input.txt", "r", stdin);
-  // freopen("output.txt", "w", stdout);
+int main() {
+//  uncomment the following lines if you want to read/write from files
+//  ifstream cin("input1.txt");
+//  ofstream cout("output.txt");
 
-  // Input
-  cin >> N;
+    cin >> N;
+    S.resize(N);
+    D.resize(N);
+    O.resize(N);
+    for (int i=0; i<N; i++)
+        cin >> S[i];
+    for (int i=0; i<N; i++)
+        cin >> D[i];
 
-  // Code
-  // ...
+    // insert your code here
+    int currentNI = 0;
+    int x;
+    for (int t = 0; t < N; t++)
+    {
+        if(t - D[t] < 0)
+        {
+            x = 0;
+        }
+        if(t - D[t] < currentNI)
+        {
+            x = currentNI;
+        }
+        else
+        {
+            x = t - D[t];
+        }
+        if(currentNI != x)
+        {
+            currentNI = x;
+            O[t] = S[x];
+        }
+        else
+        {
+            O[t] = S[currentNI];
+        }
+    }
 
-  // Output
-  cout << N << endl;
 
-  // End
-  return 0;
+    // print the result
+    for (int i=0; i<N; i++)
+        cout << O[i] << " ";
+    cout << endl;
+    return 0;
 }
